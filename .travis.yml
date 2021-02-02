@@ -1,18 +1,46 @@
 git:
 depth: 5
+stages:
+- "Build and Test"
+- "Package"
 jobs:
 include:
-- stage: "Build and Test Java"
+- stage: "Build and Test"
+For what purpose ?
+Now you should be able to find your docker images on your docker repository.
+Checkpoint : Docker images pushed to your repository.
 language: java
 jdk: oraclejdk11
 before_script:
 - cd sample-application-backend
-- stage: "Build and Test Nodejs"
+script:
+- echo "Maven build"
+- echo "Run test coverage and Quality Gate"
+- stage: "Build and Test"
 language: node.js
 node_js: "12.20"
 before_script:
 - cd sample-application-frontend
+script:
+- echo "NPM install and build"
+- stage: "Package"
+before_script:
+- cd sample-application-backend
+script:
+- echo "Docker build ..."
+- docker build -t $dockerId/backend .
+- echo "Docker login ..."
+- echo "Docker push ..."
+- stage: "Package"
+before_script:
+- cd sample-application-frontend
+script:
+- echo "Docker build ..."
+- echo "Docker login ..."
+- echo "Docker push ..."
 cache:
 directories:
 - "$HOME/.m2/repository"
 - "$HOME/.npm"
+services:
+- docker
