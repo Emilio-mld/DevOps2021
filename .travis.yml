@@ -28,7 +28,7 @@ jobs:
       - echo "Docker build ..."
       - docker build -t $dockerId/backend .
       - echo "Docker login ..."
-      - echo "$dockerPwd" | docker login -u "$dockerId" --password-stdin
+      - echo "$dockerPwd" | winpty docker login -u "$dockerId" --password-stdin
       - echo "Docker push ..."
       - docker push $dockerId/backend
   - stage: "Package"
