@@ -11,8 +11,8 @@ jobs:
     language: java
     addons:
       sonarcloud:
-      organization: "emilio-mld"
-      token: "$sonarCloudToken"
+        organization: "emilio-mld"
+        token: "$sonarCloudToken"
     before_script:
       - cd sample-application-backend
     script:
