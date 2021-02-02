@@ -16,9 +16,9 @@ jobs:
     before_script:
       - cd sample-application-backend
     script:
-      - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=Emilio-mld_DevOps2021
       - echo "Maven build"
       - echo "Run test coverage and Quality Gate"
+      - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=Emilio-mld_DevOps2021
   - stage: "Build and Test"
     language: node.js
     node_js: "12.20"
