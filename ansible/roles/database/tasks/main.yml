@@ -1,0 +1,12 @@
+---
+# tasks file for roles/database
+- name: Launch Database
+  docker_container:
+    name: database
+    image: postgres:12.0-alpine
+    networks:
+      - name: app-network
+    env:
+      POSTGRES_PASSWORD: takimapass
+      POSTGRES_USER: takima
+      POSTGRES_DB: SchoolOrganisation

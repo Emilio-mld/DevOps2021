@@ -1,0 +1,19 @@
+---
+# tasks file for roles/app
+- name: Launch application-backend
+  docker_container:
+    name: backend
+    image: emiliomld/backend
+    env:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/SchoolOrganisation
+    networks:
+      - name: "app-network"
+
+- name: Launch application-frontend
+  docker_container:
+    name: frontend
+    image: emiliomld/frontend
+    ports:
+      - "80:80"
+    networks:
+      - name: "app-network"
